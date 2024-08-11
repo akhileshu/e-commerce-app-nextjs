@@ -1,0 +1,6 @@
+convert 
+const { success } = result || {};
+    const { successMessage, productId } = success || {};
+    to
+    const { successMessage, productId } = result?.success || {};
+    ================================================================
