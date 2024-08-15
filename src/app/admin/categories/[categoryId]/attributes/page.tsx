@@ -13,7 +13,7 @@ async function page({
   const { name: categoryName } = JSON.parse(searchParams.categoryData);
   const attributes = await getCategoryAttributesByCategoryId(categoryId);
   return (
-    <div>
+    <div className="container">
       <h1>
         <p>{`category-attributes page for ${categoryName} category`}</p>
         <AddAttributeToCategory categoryId={categoryId} />

@@ -13,7 +13,7 @@ import { cn } from "@/lib/utils";
 import { MutableRefObject, ReactNode, RefObject } from "react";
 
 export function DialogComponent({
-  triggerTitle,
+  triggerText,
   description,
   saveTitle,
   onSave,
@@ -22,7 +22,7 @@ export function DialogComponent({
   className,
   triggerComponent,
 }: {
-  triggerTitle: String;
+  triggerText: String;
   description: String;
   saveTitle: String;
   className?: String;
@@ -34,15 +34,11 @@ export function DialogComponent({
   return (
     <Dialog>
       <DialogTrigger asChild>
-        {triggerComponent ? (
-          triggerComponent
-        ) : (
-          <Button variant="outline">{triggerTitle}</Button>
-        )}
+        {triggerComponent ?? <Button variant="outline">{triggerText}</Button>}
       </DialogTrigger>
       <DialogContent className={cn(className, "sm:max-w-[425px]")}>
         <DialogHeader>
-          <DialogTitle>{triggerTitle}</DialogTitle>
+          <DialogTitle>{triggerText}</DialogTitle>
           <DialogDescription>{description}</DialogDescription>
         </DialogHeader>
         {children}

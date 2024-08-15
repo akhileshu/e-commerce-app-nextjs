@@ -9,7 +9,6 @@ import { ActionSuccessBase } from "@/types/shared";
 import { revalidateTag } from "next/cache";
 import { z } from "zod";
 
-
 const addProductVarientSchema = z.object({
   price: stringToNumberSchema.pipe(z.number().min(1).max(100000)),
   productId: z.string().min(2).max(100),
@@ -35,9 +34,6 @@ export const getCategoryAttributes = handleError(async (productId: string) => {
   return await getCategoryAttributesByProductId(productId);
 });
 
-export const revalidateProductOnMOunt = async () => {
-  revalidateTag("get-product-for-card-view");
-};
 
 export const addProductVarient = handleError(
   async (prevState: unknown, formData: FormData) => {
@@ -57,9 +53,8 @@ export const addProductVarient = handleError(
     };
 
     const productVariant = await addProductVarientInDB(updatedData);
-    revalidateTag("get-product-for-card-view"); // TODO: Nextjs bug:when add first variant , reloads full route/page
-    //but when add after that , works fine just revalidates the product and full page
-    //temporary fix revalidateProductOnMOunt
+    revalidateTag("get-product-for-card-view");
+    // 🐛 🚨 having a loading.tsx at /app root will cause full page reload on first call of revalidateTag()
     revalidateTag("get-products-for-card-view");
 
     type Success = ActionSuccessBase & {};

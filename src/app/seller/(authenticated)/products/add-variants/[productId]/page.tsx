@@ -15,13 +15,15 @@ async function page({
   ]);
 
   return (
-    <ContainerWithHeading heading="Add Product Variants">
-      <AddVariants
-        product={product}
-        productId={productId}
-        categoryAttributes={categoryAttributes}
-      />
-    </ContainerWithHeading>
+    <div className="container">
+      <ContainerWithHeading heading="Add Product Variants">
+        <AddVariants
+          product={product}
+          productId={productId}
+          categoryAttributes={categoryAttributes}
+        />
+      </ContainerWithHeading>
+    </div>
   );
 }
 

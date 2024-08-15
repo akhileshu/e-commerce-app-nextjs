@@ -6,10 +6,10 @@ async function page() {
   const rootCategory = await getCategoryWithChildren();
 
   return (
-    <>
+    <div className="container">
       <AddRootCategoryComponent />
       <CategoryWithChildren category={rootCategory} />;
-    </>
+    </div>
   );
 }
 

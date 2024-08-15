@@ -1,52 +1,76 @@
 "use client";
 
-import ProductPage from "@/components/product-page";
-import { getProductForSellerViewFromDb } from "@/data-access/product";
-import { Check, CirclePlus, Pencil, X } from "lucide-react";
-import Image from "next/image";
-import { cn } from "@/lib/utils";
-import { ReactNode, useEffect, useState } from "react";
-import { DropdownMenuComponent } from "@/components/dropdown-menu";
+import {
+  Field,
+  FieldInput,
+  FieldLabel,
+  SectionWithHeading
+} from "@/app/_components/seller-form";
+import ShowInfo from "@/app/_components/showInfo";
+import { StyledLink } from "@/app/_components/styled-link";
 import { BadgeComponent, BadgeComponentWithDelete } from "@/components/badge";
 import { DialogComponent } from "@/components/dialog";
+import { DropdownMenuComponent } from "@/components/dropdown-menu";
 import { FormSubmitButton } from "@/components/submit-form-button";
-import { Field, FieldInput, FieldLabel } from "@/app/_components/seller-form";
+import { getProductForSellerViewFromDb } from "@/data-access/product";
+import { useDialogControl } from "@/hooks/useDialogControl";
 import { useTags } from "@/hooks/useTag";
 import { testPics } from "@/lib/temporary/code";
-import { useFormState } from "react-dom";
-import { editProductDetails } from "../actions";
-import { useSuccessErrorRedirectHandler } from "@/lib/handleSuccessErrorRedirect";
-import { useDialogControl } from "@/hooks/useDialogControl";
+import { cn } from "@/lib/utils";
+import { CirclePlus, Pencil } from "lucide-react";
+import Image from "next/image";
+import { useState } from "react";
 import { useFormValues } from "../hooks/use-form-values";
 import { useProductFormHandler } from "../hooks/use-product-form-handler";
-import { ProductVariant } from "@prisma/client";
+import ProductVariantsTable from "./product-variants-table";
 
 type Product = Awaited<ReturnType<typeof getProductForSellerViewFromDb>>;
+type ProductVariants = Pick<Product, "productVariants">["productVariants"];
+export type ProductVariant = ProductVariants[number];
 
 function Product({ product }: { product: Product }) {
+  const { id, productVariants } = product;
   return (
     <div className="m-2">
-      <ImagesAndInfoSection product={product} />
-      <ProductVariants variants={product.productVariants} />
+      <SectionWithHeading className="" heading="Product Info">
+        <ImagesAndInfoSection product={product} />
+      </SectionWithHeading>
+      <SectionWithHeading
+        className={!product.productVariants.length ? "pb-2" : ""}
+        heading="Product Variants"
+      >
+        {!product.productVariants.length ? (
+          <NoVariants productId={id} />
+        ) : (
+          <ProductVariantsTable
+            className="border-t"
+            variants={productVariants}
+          />
+        )}
+      </SectionWithHeading>
     </div>
   );
 }
 
-const ProductVariants=({variants}:{variants:ProductVariant[]})=>{
+function NoVariants({ productId }: { productId: string }) {
   return (
-    <div>
-      {variants.map((v,index)=><div key={index}>{v.price}</div>)}
-    </div>
+    <ShowInfo info={{ message: "No Variants for this product" }}>
+      <StyledLink
+        href={`/seller/products/add-variants/${productId}`}
+        text="Add Product Variants"
+      />
+    </ShowInfo>
   );
 }
+
 function ImagesAndInfoSection({ product }: { product: Product }) {
   const [hoverImage, setHoverImage] = useState<string | null>(null);
   const [selectedImage, setSelectedImage] = useState<string>(product.pics[0]);
 
   return (
-    <div className="flex rounded-md border divide-x-[1.5px] divide-gray-200">
+    <div className="flex divide-x-[1px] border-t">
       <ProductImages
-        images={[...product.pics,...testPics]}
+        images={[...product.pics, ...testPics]}
         hoverImage={hoverImage}
         selectedImage={selectedImage}
         onHover={setHoverImage}
@@ -139,14 +163,9 @@ function SelectedImage({ image }: { image: string }) {
 }
 
 const ProductDetails = ({ product }: { product: Product }) => {
-   const {
-     brand,
-     category,
-     name,
-     pics,
-     productSearchability,
-     productVariants,
-   } = product;
+  // bug:  brand ,category are undefind for first time fetching product , needs hot reload
+  const { brand, category, name, pics, productSearchability, productVariants } =
+    product;
   return (
     <div className="flex flex-col gap-2">
       <p className="font-medium text-lg">{name}</p>
@@ -210,7 +229,7 @@ const EditProductForm = ({
           <Pencil />
         </div>
       }
-      triggerTitle={"Edit Product Details"}
+      triggerText={"Edit Product Details"}
       description={"Add product varient"}
       saveTitle={"save"}
       dialogCloseRef={dialogCloseRef}
@@ -280,6 +299,5 @@ const EditProductForm = ({
     </DialogComponent>
   );
 };
-
 
 export default Product;

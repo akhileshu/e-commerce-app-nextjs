@@ -16,7 +16,27 @@ export const ContainerWithHeading = ({
   className?: string;
 }) => {
   return (
-    <div className={cn(`rounded-md m-4 p-2 shadow-standard`,className)}>
+    // for table container pass pb-0 px-0 className
+    <div className={cn(`rounded-md my-4 p-2 shadow-standard`, className)}>
+      <p className="text-xl md:text-2xl pl-2 mt-2 ml-2 mb-4 border-l-4  font-sans font-medium border-teal-400  dark:text-gray-200">
+        {heading}
+      </p>
+      {children}
+    </div>
+  );
+};
+
+export const SectionWithHeading = ({
+  className,
+  children,
+  heading,
+}: {
+  children: ReactNode;
+  heading: string;
+  className?: string;
+}) => {
+  return (
+    <div className={cn(`rounded-md my-4 pt-2 shadow-standard`, className)}>
       <p className="text-xl md:text-2xl pl-2 mt-2 ml-2 mb-4 border-l-4  font-sans font-medium border-teal-400  dark:text-gray-200">
         {heading}
       </p>

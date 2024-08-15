@@ -12,16 +12,18 @@ export default async function AllSellerProducts() {
   );
   const { data: products, error: productsError } = productResults || {};
   return (
-    <ContainerWithHeading className="px-0" heading="My listed Products">
-      <WrapWithShowError
-        className="flex flex-wrap justify-between"
-        error={productsError}
-        data={products}
-      >
-        {products?.map((product, index) => {
-          return <ProductCard product={product} key={product.id} />;
-        })}
-      </WrapWithShowError>
-    </ContainerWithHeading>
+    <div className="container">
+      <ContainerWithHeading className="" heading="My listed Products">
+        <WrapWithShowError
+          className="flex flex-wrap justify-between"
+          error={productsError}
+          data={products}
+        >
+          {products?.map((product, index) => {
+            return <ProductCard product={product} key={product.id} />;
+          })}
+        </WrapWithShowError>
+      </ContainerWithHeading>
+    </div>
   );
 }

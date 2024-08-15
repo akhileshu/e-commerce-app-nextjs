@@ -5,17 +5,16 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { ReactNode } from "react";
 
-export function TooltipDemo() {
+export function TooltipComponent({children:content,lable}:{children:ReactNode,lable:string}) {
   return (
     <TooltipProvider>
       <Tooltip>
         <TooltipTrigger asChild>
-          <Button variant="outline">Hover</Button>
+          <Button variant="outline">{lable}</Button>
         </TooltipTrigger>
-        <TooltipContent>
-          <p>Add to library</p>
-        </TooltipContent>
+        <TooltipContent>{content}</TooltipContent>
       </Tooltip>
     </TooltipProvider>
   );

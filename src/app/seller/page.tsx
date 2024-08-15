@@ -5,7 +5,7 @@ import { errorToast, successToast } from "../_components/toast";
 
 function page() {
   return (
-    <>
+    <div className="container">
       <div>seller home page</div>
       {/* <LoadingSpinner /> */}
       <button
@@ -16,14 +16,11 @@ function page() {
       >
         success toast
       </button>
-      <button
-        className="m-2 bg-gray-300"
-        onClick={() => errorToast("error")}
-      >
+      <button className="m-2 bg-gray-300" onClick={() => errorToast("error")}>
         error toast
       </button>
       <div></div>
-    </>
+    </div>
   );
 }
 

@@ -5,11 +5,13 @@ import { isSellerAddressSubmitted } from "./action";
 
 async function page() {
   return (
-    <ContainerWithHeading heading="Submit Address and Contact">
-      <SellerAddressForm
-        isAddressAlreadySubmitted={await isSellerAddressSubmitted()}
-      />
-    </ContainerWithHeading>
+    <div className="container">
+      <ContainerWithHeading heading="Submit Address and Contact">
+        <SellerAddressForm
+          isAddressAlreadySubmitted={await isSellerAddressSubmitted()}
+        />
+      </ContainerWithHeading>
+    </div>
   );
 }
 

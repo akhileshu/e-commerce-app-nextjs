@@ -10,10 +10,12 @@ export default function Home() {
     searchParams.get("category") as string
   );
   return (
-    <main className="">
+    <main className="container">
       <h3>hello admin!</h3>
       <p>category-attributes page</p>
-      <p>catName:{name} id: {id}</p>
+      <p>
+        catName:{name} id: {id}
+      </p>
     </main>
   );
 }

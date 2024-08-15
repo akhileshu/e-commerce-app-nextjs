@@ -13,11 +13,11 @@ export function AddBrandToCategory({ categoryId }: { categoryId: string }) {
 
   const [result, formAction] = useFormState(addBrandToCategory, null);
 
- if (result?.isSaved) closeDialog();
+  if (result?.isSaved) closeDialog();
 
   return (
     <DialogComponent
-      triggerTitle={"Add brand to category"}
+      triggerText={"Add brand to category"}
       description={"enter brand details"}
       saveTitle={"save"}
       dialogCloseRef={dialogCloseRef}

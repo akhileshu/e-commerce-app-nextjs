@@ -76,7 +76,23 @@ export const getProductForSellerViewFromDb = wrapWithDbTryCatch(
         category: true,
         productSearchability: true,
         pics: true,
-        productVariants: true,
+        productVariants: {
+          select: {
+            pics:true,
+            id: true,
+            price: true,
+            statusName: true,
+            additionalInformations: true,
+            productId: true,
+            isDefaultVariant: true,
+            productVariantSearchability: true,
+            productVariantToAttributes:{
+              select:{
+                categoryAttribute:true,id:true,value:true
+              }
+            }
+          },
+        },
         name: true,
         id: true,
       },

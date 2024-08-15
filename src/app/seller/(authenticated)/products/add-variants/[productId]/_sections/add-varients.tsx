@@ -22,9 +22,9 @@ export const AddVariants: React.FC<AddVariantsProps> = ({
   productId,
   categoryAttributes,
 }) => {
-  useEffect(() => {
-    revalidateProductOnMOunt();
-  }, []);
+  // useEffect(() => {
+  //   revalidateProductOnMOunt();
+  // }, []);
 
   return (
     <div>

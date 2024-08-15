@@ -35,7 +35,7 @@ export function AddRootCategoryComponent() {
   return (
     <DialogComponent
       onSave={onSave}
-      triggerTitle={"Add Root Category"}
+      triggerText={"Add Root Category"}
       description={"this will delete all existing categories"}
       saveTitle={"save"}
       dialogCloseRef={dialogCloseRef}

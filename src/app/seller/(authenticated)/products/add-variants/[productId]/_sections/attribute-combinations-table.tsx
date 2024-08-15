@@ -150,7 +150,7 @@ function AddVarientForm({
   return (
     <DialogComponent
       className="min-w-[70rem]"
-      triggerTitle={"Add varient"}
+      triggerText={"Add varient"}
       description={"Add product varient"}
       saveTitle={"save"}
       dialogCloseRef={dialogCloseRef}

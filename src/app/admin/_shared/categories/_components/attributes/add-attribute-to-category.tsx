@@ -41,7 +41,7 @@ export function AddAttributeToCategory({ categoryId }: { categoryId: string }) {
 
   return (
     <DialogComponent
-      triggerTitle={"Add attribute to category"}
+      triggerText={"Add attribute to category"}
       description={"enter attribute details"}
       saveTitle={"save"}
       dialogCloseRef={dialogCloseRef}

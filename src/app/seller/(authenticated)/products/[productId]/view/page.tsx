@@ -11,15 +11,9 @@ async function page({
   const productResult = await getCachedProductForSellerView(productId);
   const { data: product, error: productError } = productResult || {};
   return (
-    <ContainerWithHeading className="px-0" heading="Product Info">
-      <WrapWithShowError
-        className=""
-        error={productError}
-        data={product}
-      >
-        <Product product={product!}/>
+      <WrapWithShowError className="container" error={productError} data={product}>
+        <Product product={product!} />
       </WrapWithShowError>
-    </ContainerWithHeading>
   );
 }
 
