@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
 
 export const categories = [
   "Technology",
@@ -67,3 +67,4 @@ export const useKeywordSuggestions = (term: string) => {
 
   return keywordSuggestions;
 };
+

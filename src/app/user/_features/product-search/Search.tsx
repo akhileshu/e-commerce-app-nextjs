@@ -14,27 +14,38 @@ import {
   testHistoryItems,
   useKeywordSuggestions,
 } from "./lib";
+import { SearchProvider, useSearchContext } from "./SearchContext";
 
 export default function Search() {
   return (
-    <div
+    <SearchProvider>
+      <SearchFrom />
+    </SearchProvider>
+  );
+}
+
+function SearchFrom() {
+  const { term, handleInputChange, handleSubmit } = useSearchContext();
+  return (
+    <form
+      onSubmit={handleSubmit}
       tabIndex={0}
       className=" group flex w-fit h-12 items-center rounded-sm focus-within:ring-4 focus-within:ring-amazon-orange"
     >
       <TopSearchCategories />
       <Input />
-      <button className={cn("bg-amazon-orange p-2 rounded-r-sm")}>
+      <button type="submit" className={cn("bg-amazon-orange p-2 rounded-r-sm")}>
         <SearchIcon size={"2rem"} />
       </button>
-    </div>
+    </form>
   );
 }
 
-export function Input({ className }: { className?: string }) {
-  const [term, setTerm] = useState("");
-  function handleInputChange(e: ChangeEvent<HTMLInputElement>) {
-    setTerm(e.target.value);
-  }
+interface InputProps {
+  className?: string;
+}
+export function Input({ className }: InputProps) {
+  const { term, handleInputChange, handleSubmit } = useSearchContext();
   const keywordSuggestions = useKeywordSuggestions(term);
   return (
     <div className={cn(className, "w-[40rem] h-12 overflow-visible")}>
@@ -48,9 +59,8 @@ export function Input({ className }: { className?: string }) {
         id=""
       />
       <Suggestions
-        keywordSuggestions={
-          keywordSuggestions
-        } className="hidden group-focus-within:block"
+        keywordSuggestions={keywordSuggestions}
+        className="hidden group-focus-within:block"
       />
     </div>
   );
@@ -79,6 +89,7 @@ function Suggestions({
 
 export function KeepShoppingFor() {
   // Product pages visited recently
+  const { term, handleInputChange, handleSubmit } = useSearchContext();
   return (
     //todo : scrollbar-none not working
     <div className=" m-2 space-y-2  overflow-x-hidden  relative scrollbar-none">
@@ -98,6 +109,9 @@ export function KeepShoppingFor() {
           {Array.from({ length: 10 }).map((_, index) => {
             return (
               <div
+              onClick={()=>{
+                handleSubmit(undefined,"productId");
+              }}
                 key={index}
                 className="flex-shrink-0 size-36 rounded-sm border bg-gray-100"
               ></div>
@@ -138,7 +152,18 @@ function KeywordSuggestions({
     </div>
   );
 }
-export function RecentSearchHistory({ className }: { className: string }) {
+export function RecentSearchHistory({ className }: InputProps) {
+  const { term, setTerm, handleInputChange, handleSubmit } = useSearchContext();
+  const [isSubmitRequested, setIsSubmitRequested] = useState(false);
+
+  // Effect to trigger handleSubmit when term is updated
+  useEffect(() => {
+    if (isSubmitRequested) {
+      //todo : no need to render keyword suggestions in this case
+      handleSubmit();
+      setIsSubmitRequested(false);
+    }
+  }, [term, isSubmitRequested, handleSubmit]);
   function handleHistoryItemDelete() {}
   return (
     <div className={cn("", className)}>
@@ -147,7 +172,13 @@ export function RecentSearchHistory({ className }: { className: string }) {
           key={id}
           className="flex justify-between py-2 px-3 hover:bg-gray-200"
         >
-          <div className="space-x-2 ">
+          <div
+            className="space-x-2 "
+            onClick={() => {
+              setTerm(term);
+              setIsSubmitRequested(true);
+            }}
+          >
             <span className="font-medium text-purple-600 text-lg">{term}</span>
             <span className="text-gray-500">In</span>
             <span>{category}</span>
