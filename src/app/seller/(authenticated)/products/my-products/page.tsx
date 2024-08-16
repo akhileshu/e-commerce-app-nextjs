@@ -12,7 +12,7 @@ export default async function AllSellerProducts() {
   );
   const { data: products, error: productsError } = productResults || {};
   return (
-    <div className="container">
+    <div>
       <ContainerWithHeading className="" heading="My listed Products">
         <WrapWithShowError
           className="flex flex-wrap justify-between"

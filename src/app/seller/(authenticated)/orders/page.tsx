@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 export default function page() {
-  return <div className="container">you are autheticated seller!</div>;
+  return <div>you are autheticated seller!</div>;
 }
 
-function MyOrders(){
-    
-}
+function MyOrders() {}

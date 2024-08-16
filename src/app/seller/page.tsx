@@ -1,11 +1,11 @@
-"use client"
+"use client";
 import React from "react";
 import LoadingSpinner from "../_components/loading-spinner";
 import { errorToast, successToast } from "../_components/toast";
 
 function page() {
   return (
-    <div className="container">
+    <div>
       <div>seller home page</div>
       {/* <LoadingSpinner /> */}
       <button

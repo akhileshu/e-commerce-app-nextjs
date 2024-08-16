@@ -8,14 +8,13 @@ async function page({
 }: {
   params: { productId: string };
 }) {
-
   const [product, categoryAttributes] = await Promise.all([
     getCachedProductByIdForCardView(productId),
     getCategoryAttributes(productId),
   ]);
 
   return (
-    <div className="container">
+    <div>
       <ContainerWithHeading heading="Add Product Variants">
         <AddVariants
           product={product}

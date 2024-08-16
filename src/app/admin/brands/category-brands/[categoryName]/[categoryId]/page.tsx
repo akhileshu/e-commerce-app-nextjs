@@ -15,7 +15,7 @@ function page({
   );
   console.log({ categoryName, categoryId });
   return (
-    <div className="container">
+    <div >
       <h1>hello from category page</h1>
       <CategoryBrads
         /* cc */ categoryId={categoryId}

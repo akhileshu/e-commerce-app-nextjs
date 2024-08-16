@@ -1,7 +1,7 @@
-import { ContainerWithHeading } from '@/app/_components/seller-form';
-import { WrapWithShowError } from '@/app/_components/wrap-with-show-error';
-import { getCachedProductForSellerView } from './actions';
-import Product from './sections/product';
+import { ContainerWithHeading } from "@/app/_components/seller-form";
+import { WrapWithShowError } from "@/app/_components/wrap-with-show-error";
+import { getCachedProductForSellerView } from "./actions";
+import Product from "./sections/product";
 
 async function page({
   params: { productId },
@@ -11,10 +11,10 @@ async function page({
   const productResult = await getCachedProductForSellerView(productId);
   const { data: product, error: productError } = productResult || {};
   return (
-      <WrapWithShowError className="container" error={productError} data={product}>
-        <Product product={product!} />
-      </WrapWithShowError>
+    <WrapWithShowError error={productError} data={product}>
+      <Product product={product!} />
+    </WrapWithShowError>
   );
 }
 
-export default page
+export default page;

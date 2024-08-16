@@ -17,7 +17,7 @@ function ShowError({
       )}
     >
       <ServerCrash className="min-w-[10%]" size={40} color="#ff5c5c" />
-      <div className={`flex flex-col gap-4`}>
+      <div className={`space-y-4`}>
         <p className="font-medium">{error.message}</p>
         <p className="text-red-500 text-sm">{error.name}</p>
       </div>

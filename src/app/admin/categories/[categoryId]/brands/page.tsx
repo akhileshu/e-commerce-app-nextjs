@@ -14,7 +14,7 @@ async function page({
   const brands = await getBrandsOfACategory({ categoryId });
 
   return (
-    <div className="container">
+    <div>
       <p>category : {categoryName}</p>
       <AddBrandToCategory categoryId={categoryId} />
       <AllBrandsOfACategory brands={brands} categoryId={categoryId} />

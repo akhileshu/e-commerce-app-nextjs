@@ -26,7 +26,7 @@ export default async function RootLayout({
       <SessionProvider session={session}>
         <body className={cn(inter.className)}>
           <DevNavBar />
-          {children} 
+          <div className="container">{children} </div>
           <Toaster richColors />
         </body>
       </SessionProvider>

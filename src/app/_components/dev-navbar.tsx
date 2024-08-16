@@ -118,7 +118,7 @@ export default function DevNavBar() {
     : null;
 
   return (
-    <div className="flex justify-between shadow-lg mb-2 mt-2 sticky top-0 z-10 bg-white">
+    <nav className="flex justify-between shadow-lg mb-2 mt-2 sticky top-0 z-10 bg-white">
       <div className="flex flex-wrap gap-3 m-2 text-blue-600 text-sm ">
         {isValidSession(session) ? (
           <AuthLinks name={session.user.name} role={session.user.role} />
@@ -137,7 +137,7 @@ export default function DevNavBar() {
           />
         </div>
       ) : null}
-    </div>
+    </nav>
   );
 }
 

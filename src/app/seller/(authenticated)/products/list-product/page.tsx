@@ -8,7 +8,7 @@ export default async function page() {
   const rootCategory = await getCategoryWithChildren();
 
   return (
-    <div className="container">
+    <div>
       <CategoryBrandProvider>
         <ContainerWithHeading heading="Add a Product">
           <SelectCategoryAndBrand rootCategory={rootCategory} />

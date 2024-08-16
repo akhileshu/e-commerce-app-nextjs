@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <main className="container">
+    <main>
       <h3>hello admin!</h3>
       <p>manage all category attributes</p>
     </main>

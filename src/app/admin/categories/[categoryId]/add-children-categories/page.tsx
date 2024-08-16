@@ -22,7 +22,7 @@ export default function AddCategoriesPage({
   }
 
   return (
-    <div className="container">
+    <div>
       <AddChildrenCategoryCount
         handleSetCount={handleSetCount}
         parentCategoryName={parentCategory.name}
